@@ -1,5 +1,12 @@
 # PyWAVA Documentation
 
+
+> :information_source: This software was developed as part of a bigger project. To read about it, please refer to my [USB Malware Cleaner Kiosk](https://github.com/G4vr0ch3/USB-Malware-Cleaner-Kiosk) repository.
+
+
+> :information_source: This software is a component of the Analysis Center.
+
+
 > :warning: This python software is intended for Microsoft Windows OS powered terminals with Microsoft Windows Defender, Kaspersky anti-virus and ClamAV installed. The libraries call absolute paths to these software. If you want to have this software working, you will probably need to change the paths value inside the relevant files.
 
 ## Installation
