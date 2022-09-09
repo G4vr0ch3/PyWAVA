@@ -153,3 +153,9 @@ if __name__ == '__main__':
 
     except:
         fail("Failed to write scan results. The file will be considered as not sanitized.")
+
+    try:
+        # Remove source file if required
+        if args.r : os.remove(f_path)
+    except:
+        fail('Failed to remove source file. This is not fatal.')
