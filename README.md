@@ -1,6 +1,7 @@
 # PyWAVA Documentation
 
->
+> :warning: This python software is intended for Microsoft Windows OS powered terminals with Microsoft Windows Defender, Kaspersky anti-virus and ClamAV installed. The libraries call absolute paths to these software. If you want to have this software working, you will probably need to change the paths value inside the relevant files.
+
 ## Installation
 
 The source of the software is hosted on github and should be cloned as follows:
@@ -47,7 +48,7 @@ The “test” function will test the different functions of the software.
 
 When the Brain retrieves the list of file to be analyzed, it feeds the information to the Analysis center that will proceed to copying the files that are to be analyzed from Frontend. The analysis Center will then scan files one by one.
 
-| ![](pic/pywava.py) |
+| ![pywava](pic/pywava.py) |
 | :-: |
 | Software architecture |
 
@@ -75,3 +76,40 @@ Orange: warnings
 Red: failures  
 
 “prints.py” is not licensed.
+
+## Proof of concept
+
+To challenge the software, we used it against various innocuous and malware infected files using the following command :
+
+```cmd
+C:/> python pywava.py -f Inputs/clickme.docx
+```
+
+We ran analysis on files with different formats such as :
+- ".zip"
+- ".exe"
+- ".docx"
+- ".pdf"
+- ".docm", ".xlsm", ".pptm"
+- ".doc"
+
+We gathered the same results as those obtained with a "regular" AV analysis (without any surprise).
+
+With the software successfully passing these tests, we validated its use for in our project.
+
+However, the previous experimentations do not demonstrate the software’s robustness. One could try and find a way to exploit one of the file treatments to escape the sanitizing process. This will be considered as out of scope for the project.
+
+## Contributing to the project
+
+We will gladly accept any valuable input !  
+Should you have any remarks, advice or whatever you deem useful to us, please contact me either via:
+
+> [e-mail](mailto:gavrochebackups@gmail.com)  
+> [Discord](https://discordapp.com/users/Gavroche#2871)  
+> [Twitter](https://twitter.com/Gvrch3)
+
+Many thanks !
+
+##
+
+[Gavroche](https://github.com/G4vr0ch3)
