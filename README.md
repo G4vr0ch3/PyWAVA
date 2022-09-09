@@ -12,12 +12,12 @@
 ## Installation
 
 The source of the software is hosted on github and should be cloned as follows:
-```ps
+```bash
 C:\> git clone https://github.com/G4vr0ch3/PyWAVA
 ```
 Before using the software, requirements have to be installed using:
 
-```ps
+```bash
 C:\> cd PyWAVA
 C:\Pywava> pip install -r requirements.txt
 ```
@@ -29,13 +29,13 @@ The software is now ready to be used.
 PyWAVA can be used directly from the command line or as a python library.
 The “—test” flag will test the different functions of the software.
 
-```cmd
+```bash
 C:\Pywava> python pywava.py --test
 ```
 
 The “-f” flag with an input-file path will attempt a data sanitization process on the document.
 
-```cmd
+```bash
 C:\Pywava> python pywava.py -f <INPUT_FILE>
 ```
 
