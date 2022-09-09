@@ -29,10 +29,11 @@
 
 import argparse
 import json
+import os
 
 from pyfiglet import figlet_format as pff
 
-from libs import defender, kaspersky
+from libs import defender, kaspersky, clamav, hash
 from datetime import datetime
 from libs.prints import *
 
@@ -41,7 +42,20 @@ from libs.prints import *
 
 
 def tests():
-    kaspersky.analyze("D:\\PFE\\stoa.docx")
+
+    warning('Software test started on [' + str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")) + ']')
+
+    # Test examples :
+    f_path = "D:\\Pentest\\holo.rar"
+    try:
+        success('Hash : ' + hash.sha('Inputs/test.jpg'))
+    except:
+        fail('Hash failed.')
+    defender.analyze(f_path)
+    kaspersky.analyze(f_path)
+    clamav.analyze(f_path)
+
+    warning('Software test ended on [' + str(datetime.now().strftime("%d/%m/%Y-%H:%M:%S")) + ']')
 
 
 ################################################################################
@@ -49,28 +63,37 @@ def tests():
 
 def analyze(path):
 
+    if not os.path.isfile(path): fail('Path is not a file path'); exit()
+
     info(f'Analysing {path}')
 
     try:
+        # Run analysis
         defender_analysis = defender.analyze(path)
         kaspersky_analysis = kaspersky.analyze(path)
+        clamav_analysis = clamav.analyze(path)
     except:
         fail('Analysis failed')
         return False
 
 
-    analysis = [defender_analysis, kaspersky_analysis]
+    analysis = [defender_analysis, kaspersky_analysis, clamav_analysis]
 
     state = analysis.count(False)
 
     if state == 0 and None not in analysis :
         success('Done. No was threat detected.')
+        stat = 0
+
     elif None in analysis:
         print('')
+        stat = 1
+
     elif state > 0:
         warning(f'Done. File was flaged as malicious by {state}/{len(analysis)} AV Solution vendors')
+        stat = 2
 
-    return analysis
+    return stat, analysis
 
 
 ################################################################################
@@ -79,7 +102,7 @@ def analyze(path):
 if __name__ == '__main__':
 
     # Software definition
-    print(pff("PyAAVA"))
+    print(pff("PyWAVA"))
 
     # Argument parser creation
     parser = argparse.ArgumentParser(description='PYthon Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Gavroche, Roxane.')
@@ -97,4 +120,36 @@ if __name__ == '__main__':
 
     if f_path is None: fail('No file path specified'); exit()
 
-    analyze(f_path)
+    stat, analysis = analyze(f_path)
+
+    try:
+
+        # Save operation results
+        with open("scan_results.json", "r+") as results:
+
+            # Read existing results
+            f_data = json.load(results)
+
+            # Create JSON dump individual results
+            ind_result = {
+                "Date": datetime.now().strftime("%d/%m/%Y-%H:%M:%S"),
+                "PATH": f_path,
+                "FILESTat": stat,
+                "DEFENDER": analysis[0],
+                "KASPERSKY": analysis[1],
+                "CLAMAV": analysis[2],
+                "HASH": hash.sha(f_path),
+            }
+
+            # Append individual data
+            f_data["ind_results"].append(ind_result)
+
+            results.seek(0)
+
+            js = json.dumps(f_data, indent=4)
+
+            # Write to result file
+            results.write(js)
+
+    except:
+        fail("Failed to write scan results. The file will be considered as not sanitized.")
