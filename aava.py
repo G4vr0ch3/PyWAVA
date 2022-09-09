@@ -56,7 +56,7 @@ def analyze(path):
     except:
         fail('Analysis failed')
         return False
-lol
+
 
     analysis = [defender_analysis]
 
