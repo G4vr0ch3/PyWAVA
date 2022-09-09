@@ -30,13 +30,13 @@ PyWAVA can be used directly from the command line or as a python library.
 The “—test” flag will test the different functions of the software.
 
 ```cmd
-~$ python pywava.py --test
+C:\Pywava> python pywava.py --test
 ```
 
 The “-f” flag with an input-file path will attempt a data sanitization process on the document.
 
 ```cmd
-~$ python pywava.py -f <INPUT_FILE>
+C:\Pywava> python pywava.py -f <INPUT_FILE>
 ```
 
 The “-r” flag will remove the input file after treatment. The “—help” flag or “-h” flag will display the help page of the software.
@@ -89,7 +89,7 @@ Red: failures
 To challenge the software, we used it against various innocuous and malware infected files using the following command :
 
 ```cmd
-C:/> python pywava.py -f Inputs/clickme.docx
+C:\Pywava> python pywava.py -f Inputs/clickme.docx
 ```
 
 We ran analysis on files with different formats such as :
