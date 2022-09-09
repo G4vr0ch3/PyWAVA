@@ -32,7 +32,7 @@ import json
 
 from pyfiglet import figlet_format as pff
 
-from libs import defender
+from libs import defender, kaspersky
 from datetime import datetime
 from libs.prints import *
 
@@ -40,8 +40,8 @@ from libs.prints import *
 ################################################################################
 
 
-def test():
-    print(None)
+def tests():
+    kaspersky.analyze("D:\\PFE\\stoa.docx")
 
 
 ################################################################################
@@ -53,19 +53,24 @@ def analyze(path):
 
     try:
         defender_analysis = defender.analyze(path)
+        kaspersky_analysis = kaspersky.analyze(path)
     except:
         fail('Analysis failed')
         return False
 
 
-    analysis = [defender_analysis]
+    analysis = [defender_analysis, kaspersky_analysis]
 
-    if False in analysis :
-        warning('Done. Threats were detected.')
-    else:
+    state = analysis.count(False)
+
+    if state == 0 and None not in analysis :
         success('Done. No was threat detected.')
+    elif None in analysis:
+        print('')
+    elif state > 0:
+        warning(f'Done. File was flaged as malicious by {state}/{len(analysis)} AV Solution vendors')
 
-    return defender_analysis
+    return analysis
 
 
 ################################################################################

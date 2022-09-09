@@ -2,6 +2,8 @@ import os
 
 def analyze(path, rem="-DisableRemediation"):
 
+    c = None
+
     # Defender CLI tool path
     defender_cli = """ "C:\\Program Files\\Windows Defender\\MpCmdRun.exe" """
 
