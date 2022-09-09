@@ -48,7 +48,7 @@ The “test” function will test the different functions of the software.
 
 When the Brain retrieves the list of file to be analyzed, it feeds the information to the Analysis center that will proceed to copying the files that are to be analyzed from Frontend. The analysis Center will then scan files one by one.
 
-| ![pywava](pic/pywava.py) |
+| ![pywava](pic/pywava.png) |
 | :-: |
 | Software architecture |
 
