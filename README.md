@@ -9,6 +9,10 @@
 
 > :warning: This python software is intended for Microsoft Windows OS powered terminals with Microsoft Windows Defender, Kaspersky anti-virus and ClamAV installed. The libraries call absolute paths to these software. If you want to have this software working, you will probably need to change the paths value inside the relevant files.
 
+##
+
+PyWAVA: Python Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Gavroche, Roxane.
+
 ## Installation
 
 The source of the software is hosted on github and should be cloned as follows:
