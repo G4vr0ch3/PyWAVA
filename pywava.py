@@ -114,8 +114,8 @@ if __name__ == '__main__':
 
     args=parser.parse_args()
 
-    if args.b is not True: print(pff("Pyrate"))
-    
+    if args.b is not True: print(pff("PyWAVA"))
+
     if args.test: tests(); exit()
 
     # Retrieve file path and type
