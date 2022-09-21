@@ -27,7 +27,7 @@
 ################################################################################
 
 
-import os
+import subsystem
 
 
 ################################################################################
@@ -44,7 +44,7 @@ def analyze(path, rem="i0"):
     Remediation = rem
 
     # Run analysis
-    cmd = os.system(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""")
+    cmd = subsystem.check_output(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
     if cmd == 0:

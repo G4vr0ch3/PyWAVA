@@ -27,7 +27,7 @@
 ################################################################################
 
 
-import os
+import subprocess
 
 
 ################################################################################
@@ -41,7 +41,7 @@ def analyze(path):
     clamav_cli = """ "C:\\Program Files (x86)\\ClamAV\\clamscan.exe" """
 
     # Run analysis
-    cmd = os.system(f"""cmd /c {clamav_cli} {path}""")
+    cmd = subprocess.call(f"""cmd /c {clamav_cli} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
     if cmd == 0:

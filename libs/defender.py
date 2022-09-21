@@ -27,7 +27,7 @@
 ################################################################################
 
 
-import os
+import subsystem
 
 
 ################################################################################
@@ -47,7 +47,7 @@ def analyze(path, rem="-DisableRemediation"):
     Remediation = rem
 
     # Run analysis
-    cmd = os.system(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""")
+    cmd = subsystem.check_output(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If the file is not flagged as malicious
     if cmd == 0:

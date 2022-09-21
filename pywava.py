@@ -86,7 +86,7 @@ def analyze(path):
         stat = 0
 
     elif None in analysis:
-        print('')
+        fail('Analysis process did not perform as expected')
         stat = 1
 
     elif state > 0:
@@ -100,9 +100,6 @@ def analyze(path):
 
 
 if __name__ == '__main__':
-
-    # Software definition
-    print(pff("PyWAVA"))
 
     # Argument parser creation
     parser = argparse.ArgumentParser(description='PYthon Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Gavroche, Roxane.')
