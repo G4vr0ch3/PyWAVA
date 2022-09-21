@@ -44,14 +44,14 @@ def analyze(path, rem="i0"):
     Remediation = rem
 
     # Run analysis
-    cmd = subprocess.check_output(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    cmd = subprocess.run(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
-    if cmd == 0:
+    if cmd.returncode == 0:
         c = True
 
     # If file is flagged as malicious
-    if cmd == 3 or cmd == 2 :
+    if cmd.returncode == 3 or cmd == 2 :
         c = False
 
     return c

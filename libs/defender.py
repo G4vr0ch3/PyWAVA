@@ -47,14 +47,15 @@ def analyze(path, rem="-DisableRemediation"):
     Remediation = rem
 
     # Run analysis
-    cmd = subprocess.check_output(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    cmd = subprocess.run(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    
 
     # If the file is not flagged as malicious
-    if cmd == 0:
+    if cmd.returncode == 0:
         c = True
 
     # If the file is flagged as malicious
-    if cmd == 2:
+    if cmd.returncode == 2:
         c = False
 
     return c

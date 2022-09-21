@@ -41,14 +41,14 @@ def analyze(path):
     clamav_cli = """ "C:\\Program Files (x86)\\ClamAV\\clamscan.exe" """
 
     # Run analysis
-    cmd = subprocess.call(f"""cmd /c {clamav_cli} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    cmd = subprocess.run(f"""cmd /c {clamav_cli} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
-    if cmd == 0:
+    if cmd.returncode == 0:
         c = True
 
     # If file is flagged as malicious
-    if cmd == 1:
+    if cmd.returncode == 1:
         c = False
 
     return c

@@ -74,8 +74,7 @@ def analyze(path):
         clamav_analysis = clamav.analyze(path)
     except:
         fail('Analysis failed')
-        return False
-
+        return False, False
 
     analysis = [defender_analysis, kaspersky_analysis, clamav_analysis]
 
@@ -87,6 +86,7 @@ def analyze(path):
 
     elif None in analysis:
         fail('Analysis process did not perform as expected')
+        print(analysis)
         stat = 1
 
     elif state > 0:
