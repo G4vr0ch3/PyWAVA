@@ -61,22 +61,22 @@ def tests():
 ################################################################################
 
 
-def analyze(path):
+def analyze(path, d, k, c):
 
     if not os.path.isfile(path): fail('Path is not a file path'); exit()
 
     info(f'Analysing {path}')
 
-    #try:
+    try:
         # Run analysis
-    defender_analysis = defender.analyze(path)
-    kaspersky_analysis = kaspersky.analyze(path)
-    clamav_analysis = clamav.analyze(path)
-    #except:
-    #    fail('Analysis failed')
-    #    return False, False
+        analysis = []
 
-    analysis = [defender_analysis, kaspersky_analysis, clamav_analysis]
+        if d: analysis.append(defender.analyze(path))
+        if k: analysis.append(kaspersky.analyze(path))
+        if c: analysis.append(clamav.analyze(path))
+    except:
+        fail('Analysis failed')
+        return False, False
 
     state = analysis.count(False)
 
@@ -107,6 +107,11 @@ if __name__ == '__main__':
     parser.add_argument('--test', help="Run software test", action="store_true")
     parser.add_argument('-f', metavar='file', type=str, help="Target file path")
     parser.add_argument('-b', help="Disable banner", action="store_true")
+    parser.add_argument('-a', help="Full AV selection", action="store_true", default=False)
+    parser.add_argument('-d', help="Defender AV Analysis", action='store_const', const=True, default=False)
+    parser.add_argument('-k', help="Kaspersky AV Analysis", action='store_const', const=True, default=False)
+    parser.add_argument('-c', help="ClamAV AV Analysis", action='store_const', const=True, default=False)
+
     parser.add_argument('-r', help="Source file removal flag", action="store_true")
 
     args=parser.parse_args()
@@ -115,12 +120,27 @@ if __name__ == '__main__':
 
     if args.test: tests(); exit()
 
+    d = args.d
+    k = args.k
+    c = args.c
+
+    if  args.a: d, k, c = True, True, True
+
+    if not d | k | c: fail('No AV solution was selected.'); exit()
+
     # Retrieve file path and type
     f_path = args.f
 
     if f_path is None: fail('No file path specified'); exit()
 
-    stat, analysis = analyze(f_path)
+    stat, analysis = analyze(f_path, d, k, c)
+
+    res = []
+    for i in range(3):
+        if i < len(analysis):
+            res.append(analysis[i])
+        else:
+            res.append(None)
 
     try:
 
@@ -135,9 +155,9 @@ if __name__ == '__main__':
                 "Date": datetime.now().strftime("%d/%m/%Y-%H:%M:%S"),
                 "PATH": f_path,
                 "FILESTat": stat,
-                "DEFENDER": analysis[0],
-                "KASPERSKY": analysis[1],
-                "CLAMAV": analysis[2],
+                "DEFENDER": res[0],
+                "KASPERSKY": res[1],
+                "CLAMAV": res[2],
                 "HASH": hash.sha(f_path),
             }
 
