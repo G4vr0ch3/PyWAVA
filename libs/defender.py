@@ -28,6 +28,8 @@
 
 
 import subprocess
+from libs.spinner import spinner
+from libs.prints import *
 
 
 ################################################################################
@@ -47,15 +49,17 @@ def analyze(path, rem="-DisableRemediation"):
     Remediation = rem
 
     # Run analysis
-    cmd = subprocess.run(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    
+    with spinner(f'Analyzing {path}'):
+        cmd = subprocess.run(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If the file is not flagged as malicious
     if cmd.returncode == 0:
+        success('File was declared safe by Microoft Windows Defender')
         c = True
 
     # If the file is flagged as malicious
     if cmd.returncode == 2:
+        warning('File was flagged as malicious by Microsoft Windows Defender')
         c = False
 
     return c

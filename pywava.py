@@ -67,14 +67,14 @@ def analyze(path):
 
     info(f'Analysing {path}')
 
-    try:
+    #try:
         # Run analysis
-        defender_analysis = defender.analyze(path)
-        kaspersky_analysis = kaspersky.analyze(path)
-        clamav_analysis = clamav.analyze(path)
-    except:
-        fail('Analysis failed')
-        return False, False
+    defender_analysis = defender.analyze(path)
+    kaspersky_analysis = kaspersky.analyze(path)
+    clamav_analysis = clamav.analyze(path)
+    #except:
+    #    fail('Analysis failed')
+    #    return False, False
 
     analysis = [defender_analysis, kaspersky_analysis, clamav_analysis]
 

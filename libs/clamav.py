@@ -28,6 +28,8 @@
 
 
 import subprocess
+from libs.spinner import spinner
+from libs.prints import *
 
 
 ################################################################################
@@ -41,14 +43,17 @@ def analyze(path):
     clamav_cli = """ "C:\\Program Files (x86)\\ClamAV\\clamscan.exe" """
 
     # Run analysis
-    cmd = subprocess.run(f"""cmd /c {clamav_cli} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    with spinner(f'Analyzing {path}'):
+        cmd = subprocess.run(f"""cmd /c {clamav_cli} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
     if cmd.returncode == 0:
+        success('File was declared safe by ClamAV')
         c = True
 
     # If file is flagged as malicious
     if cmd.returncode == 1:
+        warning('File was flagged as malicious by ClamAV')
         c = False
 
     return c

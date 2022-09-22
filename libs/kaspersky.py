@@ -28,6 +28,8 @@
 
 
 import subprocess
+from libs.spinner import spinner
+from libs.prints import *
 
 
 ################################################################################
@@ -44,14 +46,17 @@ def analyze(path, rem="i0"):
     Remediation = rem
 
     # Run analysis
-    cmd = subprocess.run(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    with spinner(f'Analyzing {path}'):
+        cmd = subprocess.run(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
     if cmd.returncode == 0:
+        success('File was declared safe by Kaspersky AV')
         c = True
 
     # If file is flagged as malicious
     if cmd.returncode == 3 or cmd == 2 :
+        warning('File was flagged as malicious by Kaspersky AV')
         c = False
 
     return c
