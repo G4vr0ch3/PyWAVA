@@ -28,8 +28,8 @@
 
 
 import subprocess
-from libs.spinner import spinner
-from libs.prints import *
+from Asterix_libs.spinner import spinner
+from Asterix_libs.prints import *
 
 
 ################################################################################
