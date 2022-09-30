@@ -33,9 +33,10 @@ import os
 
 from pyfiglet import figlet_format as pff
 
-from libs import defender, kaspersky, clamav, hash
+from libs import defender, kaspersky, clamav
 from datetime import datetime
-from libs.prints import *
+from Asterix_libs import hash
+from Asterix_libs.prints import *
 
 
 ################################################################################
