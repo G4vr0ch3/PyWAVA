@@ -50,7 +50,7 @@ def analyze(path, rem="-DisableRemediation"):
 
     # Run analysis
     with spinner(f'Analyzing {path}'):
-        cmd = subprocess.run(f"""cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        cmd = subprocess.run(f'cmd /c {defender_cli} -Scan -ScanType {ScanType} {Remediation} -File "{path}"', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If the file is not flagged as malicious
     if cmd.returncode == 0:
