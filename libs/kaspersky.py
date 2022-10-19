@@ -47,7 +47,7 @@ def analyze(path, rem="i0"):
 
     # Run analysis
     with spinner(f'Analyzing {path}'):
-        cmd = subprocess.run(f'cmd /c {kasperski_cli} SCAN /{Remediation} "{path}"', shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        cmd = subprocess.run(f"""cmd /c {kasperski_cli} SCAN /{Remediation} {path}""", shell=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     # If file is not flagged as malicious
     if cmd.returncode == 0:
