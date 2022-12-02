@@ -1,7 +1,7 @@
 # PyWAVA Documentation
 
 
-> :information_source: This software was developed as part of a bigger project. To read about it, please refer to my [USB Malware Cleaner Kiosk](https://github.com/G4vr0ch3/USB-Malware-Cleaner-Kiosk) repository.
+> :information_source: This software was developed as part of a bigger project. To read about it, please refer to my [USB Malware Cleaner Kiosk](https://github.com/PetitPrinc3/USB-Malware-Cleaner-Kiosk) repository.
 
 
 > :information_source: This software is a component of the Analysis Center.
@@ -11,7 +11,7 @@
 
 ##
 
-PyWAVA: Python Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Gavroche, Roxane.
+PyWAVA: Python Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Petit Prince.
 
 ##
 
@@ -19,7 +19,7 @@ PyWAVA: Python Wrapper for Anti-Virus Analysis. Copyright (C) 2022 Gavroche, Rox
 
 The source of the software is hosted on github and should be cloned as follows:
 ```bash
-C:\> git clone https://github.com/G4vr0ch3/PyWAVA
+C:\> git clone https://github.com/PetitPrinc3/PyWAVA
 ```
 Before using the software, requirements have to be installed using:
 
@@ -125,4 +125,4 @@ Many thanks !
 
 ##
 
-[Gavroche](https://github.com/G4vr0ch3)
+[Gavroche](https://github.com/PetitPrinc3)
