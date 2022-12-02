@@ -119,7 +119,6 @@ Should you have any remarks, advice or whatever you deem useful to us, please co
 
 > [e-mail](mailto:gavrochebackups@gmail.com)  
 > [Discord](https://discordapp.com/users/Gavroche#2871)  
-> [Twitter](https://twitter.com/Gvrch3)
 
 Many thanks !
 
